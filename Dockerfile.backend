@@ -1,0 +1,18 @@
+FROM golang:1.18
+
+WORKDIR /app
+
+COPY go.mod .
+COPY go.sum .
+
+WORKDIR /app/api
+
+COPY api .
+
+RUN go mod download
+
+RUN go build -o main
+
+EXPOSE 8000
+
+CMD ["./main", "seed"]

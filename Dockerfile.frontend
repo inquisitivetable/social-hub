@@ -1,0 +1,17 @@
+FROM node:19.7.0-slim
+
+COPY images ./app/images
+
+WORKDIR /app/frontend
+
+COPY frontend/package*.json ./
+
+RUN npm install
+
+COPY frontend ./
+
+RUN npm run build
+
+EXPOSE 3000
+
+CMD ["node", "server.js"]
